@@ -49,8 +49,8 @@ Please put the .env file under /model folder, which is the place we performs con
 
 ```bash
 ZENDESK_SUBDOMAIN = {'zendeskcodingchallengedomain'}
-ZENDESK_EMAIL = 'zendeskaccountemail@gmail.com'
-ZENDESK_PASSWORD = 'your p@ssw0rd'
+ZENDESK_EMAIL = {'zendeskaccountemail@gmail.com'}
+ZENDESK_PASSWORD = {'your p@ssw0rd'}
 ```
     
 ## Usage
