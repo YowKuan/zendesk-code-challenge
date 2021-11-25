@@ -63,7 +63,7 @@ class AppView:
                 if ticketsArr[i]["id"] is None:
                     continue
                 else:
-                    print("<" + ticketsArr[i]["status"] + ">", "Ticket", ticketsArr[i]["id"], '|' "opened by",
+                    print("<" + ticketsArr[i]["status"] + ">", "Ticket", ticketsArr[i]["id"], '| ' "opened by",
                           ticketsArr[i]["requester_id"] ,'|', "updated at", ticketsArr[i]["updated_at"])
                 pageTickets += 1
         print("\nDisplaying", pageTickets, "tickets on page", pageNo, "of", totalPages)

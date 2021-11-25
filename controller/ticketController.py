@@ -45,9 +45,9 @@ class TicketController:
             page = self.view.displayTickets(tickets, 1)
         except AssertionError as e:
             self.view.errorCode = self.api.errorCode
-            if tickets == 401:  # No tickets on account
+            if tickets == 404:  # No tickets on account
                 self.view.displayBadRequest("No tickets on account to display")
-            elif tickets == 404:  # Can't authenticate with API
+            elif tickets == 401:  # Can't authenticate with API
                 self.view.displayBadRequest("API authentication not permitted or invalid user credentials.")
             elif tickets == 503:  # API unavailable
                 self.view.displayBadRequest("API unavailable. Please try again later")

@@ -12,10 +12,7 @@ class requestHandler:
         self.email = os.getenv('ZENDESK_EMAIL')  # Zendesk API username
         self.password = os.getenv('ZENDESK_PASSWORD')  # Zendesk API password
         self.errorCode = None
-    
-    # def get_tickets(self):
-    #     tickets = self.zendeskRequest("all")
-    #     return tickets
+
     def get_tickets(self):
         ticketsJSON = self.zendeskRequest("all")
         if ticketsJSON in [401, 404, 503, -1] or "tickets" not in ticketsJSON:
@@ -49,41 +46,23 @@ class requestHandler:
             return ticketsJSON
         elif ticketsJSON in [401, 404, 503, -1]:
             return ticketsJSON
-            
-        # elif ticketsJSON in [401, 404, 503, -1]:
-        #     if ticketsJSON is 404:
-        #         return 404  # Invalid ticket ID
-        #     elif ticketsJSON == 503:
-        #         return 0  # If API is unavailable
-        #     elif ticketsJSON is 401:
-        #         return 1  # Invalid user credentials
-        #     elif ticketsJSON == -1:
-        #         return False  # All other bad requests
-        #     return False
     
     def zendeskRequest(self, option='all', ticket_id=''):
         if option == 'all':
             self.URL = "https://" + self.subdomain + ".zendesk.com/api/v2/tickets.json"
         else:
             self.URL = "https://" + self.subdomain + ".zendesk.com/api/v2/tickets/" + str(ticket_id) + ".json"
-        #print(self.URL)
         response = requests.get(self.URL, auth=(self.email, self.password))
-        #print("response:",response)
         if response.status_code != 200:
-            # print("Bad request. Error getting data from API. Error Code: ", r.status_code)
             self.errorCode = response.status_code
-            if response.status_code == 401:
-                #return None  # Authentication not allowed or invalid user credentials
+            if response.status_code == 401:  # Authentication not allowed or invalid user credentials
                 return 401
             elif response.status_code == 404:  # 404 = No tickets or invalid ticket ID
-                #return False
                 return 404
             elif response.status_code == 503:  # API unavailable
-                #return 1
                 return 503
             return -1  # For all other bad requests
         self.data = response.json()
-        #print(self.data)
         new = self.data
         next_page = []
         # Go through all web pages containing tickets and add them to tickets json. One page can contain 100 tickets
