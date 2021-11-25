@@ -8,7 +8,7 @@ class AppView:
 
     def initialize(self):  # Displays Start message on CLI screen
         print("\n\n-------------------------WELCOME TO ZENDESK TICKET VIEWER-------------------------")
-        print("This application lets you view tickets and their details on your zendesk account")
+        print("This application allows you view tickets and their details on your zendesk account")
         print("Please enter a command, to view command options, type 'menu': ", end="")
         return 0
 
@@ -27,10 +27,10 @@ class AppView:
 
     def show_menu(self):  # Displays Command Menu on CLI Screen
         print("\nCommand Options:")
-        print("Enter 1 to display all tickets")
-        print("Enter 2 to display single ticket")
-        print("Enter q to exit application")
-        print("Enter 'menu' to display Command Menu")
+        print("* Enter 1 to display all tickets")
+        print("* Enter 2 to display single ticket")
+        print("* Enter q to exit application")
+        print("* Enter 'menu' to display Command Menu")
         print("\nEnter your choice: ", end="")
         return 0
 
@@ -63,8 +63,8 @@ class AppView:
                 if ticketsArr[i]["id"] is None:
                     continue
                 else:
-                    print("<" + ticketsArr[i]["status"] + ">", "Ticket", ticketsArr[i]["id"], "opened by",
-                          ticketsArr[i]["requester_id"], "updated at", ticketsArr[i]["updated_at"])
+                    print("<" + ticketsArr[i]["status"] + ">", "Ticket", ticketsArr[i]["id"], '|' "opened by",
+                          ticketsArr[i]["requester_id"] ,'|', "updated at", ticketsArr[i]["updated_at"])
                 pageTickets += 1
         print("\nDisplaying", pageTickets, "tickets on page", pageNo, "of", totalPages)
         print("\nEnter 'd' to go down, 'u' to go up, 'menu' for menu and 'q' for quit: ", end="")
@@ -72,9 +72,11 @@ class AppView:
 
     def displayTicket(self, ticketsJSON):  # Displays one ticket details on CLI screen
         if ticketsJSON and "ticket" in ticketsJSON:
-            print("\n" + "<" + ticketsJSON["ticket"]["status"] + ">", "Ticket", ticketsJSON["ticket"]["id"], "subject", "'" +
-                  ticketsJSON["ticket"]["subject"] + "'", "opened by", ticketsJSON["ticket"]["requester_id"], "updated at",
-                  ticketsJSON["ticket"]["updated_at"])
+            print("\n")
+            print("   ticket id:", ticketsJSON["ticket"]["id"])
+            print("   ticket status:", ticketsJSON["ticket"]["status"])
+            print("   subject:", ticketsJSON["ticket"]["subject"])
+            print("   updated at:", ticketsJSON["ticket"]["updated_at"])
             print("\nPlease enter a command, to view command menu, type 'menu': ", end="")
             return 0
         else:
