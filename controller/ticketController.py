@@ -17,6 +17,7 @@ class TicketController:
     
     def runMainProgram(self):
         self.view.initialize()
+        self.input = ''
         
         while True:
             self.input = input()
@@ -31,11 +32,10 @@ class TicketController:
                 if not response:
                     self.view.display_message("", 1)
             elif self.input == 'q' or self.input == 'Q':
-                self.view.display_message("Thank you for using our ticket checking system, bye.", 0)
-                break
+                sys.exit(self.view.quit())  # Print quit message and quit
             else:
                 self.view.display_message("Invalid input. Please type menu to see all options\n", 1)
-        self.input = ''
+        
     
     def showAllTickets(self):
         try:
@@ -55,7 +55,7 @@ class TicketController:
                 self.view.displayBadRequest("Unknown Bad Request")
             self.view.errorCode = None
             self.api.errorCode = None
-            return None
+            return tickets
         while True:
             self.input = input()
             if self.input == 'q':  # Quit app
@@ -70,7 +70,7 @@ class TicketController:
                 page -= 1
                 page = self.view.displayTickets(tickets, page)
             else:
-                self.view.displayInputMessage(
+                self.view.display_message(
                     "Page command error. 'd' to go down, 'u' to go up, 'menu' for menu and 'q' for quit: ", 1)
                 # Invalid user input for ticket paging
             self.input = ""
@@ -83,7 +83,7 @@ class TicketController:
         self.input = ""
         try:
             self.view.fetchTickets(ticketID)  # Get ticket
-            ticket = self.api.getTicket(ticketID)
+            ticket = self.api.get_ticket(ticketID)
             assert ticket not in [401, 404, 503, -1]
             self.view.displayTicket(ticket)  # Display ticket
             self.currID = int(ticketID)  # Current ticket ID
