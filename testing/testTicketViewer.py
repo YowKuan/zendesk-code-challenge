@@ -177,10 +177,10 @@ class ViewTester(unittest.TestCase):
 
 class MainMenuTester(unittest.TestCase):
     @patch("builtins.input", side_effect=['menu', '1', 'd', 'q']) 
-    def test_user_quit(self, input):
+    def test_user_quit_from_entry(self, input):
         viewer = start_viewer()
         with self.assertRaises(SystemExit) as cm:
-            viewer.run()
+           viewer.run()
         self.assertEqual(viewer.currPage, 2) 
 
 

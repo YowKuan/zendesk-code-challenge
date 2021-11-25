@@ -62,7 +62,7 @@ class TicketController:
                 sys.exit(self.view.quit())  # Print quit message and quit
             elif self.input == "menu":  # Show menu
                 self.view.show_menu()
-                break
+                return 1
             elif self.input == "d":  # Page down
                 page += 1
                 page = self.view.displayTickets(tickets, page)
@@ -71,7 +71,7 @@ class TicketController:
                 page = self.view.displayTickets(tickets, page)
             else:
                 self.view.display_message(
-                    "Page command error. 'd' to go down, 'u' to go up, 'menu' for menu and 'q' for quit: ", 1)
+                    "Page command error. 'd' to go down, 'u' to go up, 'menu' for menu and 'q' for quit \n", 1)
                 # Invalid user input for ticket paging
             self.input = ""
             self.currPage = page
