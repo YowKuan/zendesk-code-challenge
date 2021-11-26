@@ -64,7 +64,9 @@ python3 entryPoint.py
 
 ## Test
 
-Use the following command to start the test(remember to change {directory of this repo} into your current directory
+Use the following command to start the test.r
+
+Remember to change {directory of this repo} into your current directory. This ensure coverage to only test the application code inside the repository
 
 ```bash
 cd testing
