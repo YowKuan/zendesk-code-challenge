@@ -46,13 +46,14 @@ class TicketController:
         except AssertionError as e:
             self.view.errorCode = self.api.errorCode
             if tickets == 404:  # No tickets on account
-                self.view.displayBadRequest("No tickets on account to display")
+                self.view.displayBadRequest("[Error] No tickets on account to display")
             elif tickets == 401:  # Can't authenticate with API
-                self.view.displayBadRequest("API authentication not permitted or invalid user credentials.")
+                self.view.displayBadRequest("[Error] API authentication not permitted or invalid user credentials.")
             elif tickets == 503:  # API unavailable
-                self.view.displayBadRequest("API unavailable. Please try again later")
+                self.view.displayBadRequest("[Error] API unavailable. Please try again later")
             elif tickets -1:  # Other Bad Requests
-                self.view.displayBadRequest("Unknown Bad Request")
+                self.view.displayBadRequest("[Error] Unknown Bad Request")
+            self.view.display_message('', 1)
             self.view.errorCode = None
             self.api.errorCode = None
             return tickets
@@ -91,13 +92,13 @@ class TicketController:
         except AssertionError as e:
             self.view.errorCode = self.api.errorCode
             if ticket == 401:  # Can't authenticate with API
-                self.view.displayBadRequest("API authentication not permitted or invalid user credentials.")
+                self.view.displayBadRequest("[Error] API authentication not permitted or invalid user credentials.\n")
             elif ticket == 404:  # Ticket ID not valid
-                self.view.displayBadRequest("The ticket ID you gave is not a valid ID")
+                self.view.displayBadRequest("[Error] The ticket ID you gave is not a valid ID\n")
             elif ticket == 503:  # API unavailable
-                self.view.displayBadRequest("API unavailable. Please try again later")
+                self.view.displayBadRequest("[Error] API unavailable. Please try again later\n")
             elif ticket -1:  # Other Bad Requests
-                self.view.displayBadRequest("Unknown Bad Request")
+                self.view.displayBadRequest("[Error] Unknown Bad Request")
             self.view.errorCode = None
             self.api.errorCode = None
             return False

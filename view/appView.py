@@ -14,7 +14,7 @@ class AppView:
 
     def displayBadRequest(self, message):  # Displays bad request message on CLI screen
         if self.errorCode is not None:
-            print("\nBad request. Error getting data from API. Error Code:", self.errorCode)
+            print("\n[Bad request] Error getting data from API. Error Code:", self.errorCode)
         print(message)
         
         return 1
@@ -22,7 +22,8 @@ class AppView:
     def display_message(self, message, type):
         print(message, end="")        
         if type == 1:
-            print("Please enter a command: ", end="")
+            print("[Redirect] Go back to main page......\n")
+            print("Please enter a command, to view command options, type 'menu': ", end="")
         return type  # Returns 0 on input prompt type messages, returns 1 on input error type messages
 
     def show_menu(self):  # Displays Command Menu on CLI Screen
@@ -77,6 +78,7 @@ class AppView:
             print("   ticket status:", ticketsJSON["ticket"]["status"])
             print("   subject:", ticketsJSON["ticket"]["subject"])
             print("   updated at:", ticketsJSON["ticket"]["updated_at"])
+            print("[Redirect] Go back to main page......\n")
             print("\nPlease enter a command, to view command menu, type 'menu': ", end="")
             return 0
         else:
